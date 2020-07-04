@@ -1,42 +1,7 @@
-### day 01 
+## day 01 
 
-三道题来源于《小红书2020校招算法笔试题卷一》[链接](<https://www.nowcoder.com/test/23568027/summary>)
-
-#### 1. [字符串倒序](<https://www.nowcoder.com/questionTerminal/cb4bd428c20549c5aafab4297cecb9ec?answerType=1&f=discussion>)
-
-> 时间限制：C/C++ 1秒，其他语言2秒
->
-> 空间限制：C/C++ 256M，其他语言512M
-
-薯队长带着小红薯参加密室逃脱团建游戏，首先遇到了反转游戏，小红薯们根据游戏提示收集了多个单词线索，并将单词按要求加一个空格组 成了句子，最终要求把句子按单词反转解密。 说明：收集的时候单词前后可能会有多个空格，反转后单词不能有多个空格，具体见输入输出样例。
-
-##### **输入描述:**
-
-```
-输入一个字符串。包含空格和可见字符。长度<=100000。 
-```
-
-##### **输出描述:**
-
-```
-输出一个字符串，表示反转后结果。
-```
-
-##### **输入例子1:**
-
-```
-the	sky	is blue!
-```
-
-##### **输出例子1:**
-
-```
-blue! is sky the
-```
-
-
-
-#### 2. [笔记精选](<https://www.nowcoder.com/questionTerminal/60a9ce2437694f4f81d6ed94a0c265e9?answerType=1&f=discussion>)
+### 1. [笔记精选](<https://www.nowcoder.com/questionTerminal/60a9ce2437694f4f81d6ed94a0c265e9?answerType=1&f=discussion>)
+来源：[小红书2020校招算法笔试题卷一](<https://www.nowcoder.com/test/23568027/summary>)
 
 > 时间限制：C/C++ 1秒，其他语言2秒
 >
@@ -46,42 +11,34 @@ blue! is sky the
 
 薯队长想从中选出一些笔记，作一个精选集合。挑选的时候有两个规则：
 
- 1.不能出现连续编号的笔记。 
+- 1.不能出现连续编号的笔记。 
 
-2.总点赞总数最多 
+- 2.总点赞总数最多 
 
 如果满足1，2条件有多种方案，挑选笔记总数最少的那种
 
-##### **输入描述:**
-
 ```
+输入描述:
 输入包含两行。第一行整数n表示多少篇笔记。 第二行n个整数分别表示n篇笔记的获得的点赞数。   
 （0<n<=1000, 0<=点赞数<=1000) 
-```
 
-##### **输出描述:**
-
-```
+输出描述:
 输出两个整数x,y。空格分割。
 x表示总点赞数，y表示挑选的笔记总数。
-```
 
-##### **输入例子1:**
-
-```
+输入例子1:
 4
 1 2 3 1
-```
 
-##### **输出例子1:**
-
-```
+输出例子1:
 4 2
 ```
 
+#### [题解](./solution_1.md)
 
+### 2. [击败魔物](<https://www.nowcoder.com/questionTerminal/e93f31a0387b40e88a53e55b8ab703f8?answerType=1&f=discussion>)
+来源：[小红书2020校招算法笔试题卷一](<https://www.nowcoder.com/test/23568027/summary>)
 
-#### 3. [击败魔物](<https://www.nowcoder.com/questionTerminal/e93f31a0387b40e88a53e55b8ab703f8?answerType=1&f=discussion>)
 
 > 时间限制：C/C++ 1秒，其他语言2秒
 >
