@@ -2,7 +2,7 @@
 
 三道题来源于《小红书2020校招算法笔试题卷一》[链接](<https://www.nowcoder.com/test/23568027/summary>)
 
-#### 字符串倒序
+#### 1. [字符串倒序](<https://www.nowcoder.com/questionTerminal/cb4bd428c20549c5aafab4297cecb9ec?answerType=1&f=discussion>)
 
 > 时间限制：C/C++ 1秒，其他语言2秒
 >
@@ -36,7 +36,7 @@ blue! is sky the
 
 
 
-#### 笔记精选
+#### 2. [笔记精选](<https://www.nowcoder.com/questionTerminal/60a9ce2437694f4f81d6ed94a0c265e9?answerType=1&f=discussion>)
 
 > 时间限制：C/C++ 1秒，其他语言2秒
 >
@@ -56,7 +56,7 @@ blue! is sky the
 
 ```
 输入包含两行。第一行整数n表示多少篇笔记。 第二行n个整数分别表示n篇笔记的获得的点赞数。   
-（0<n<=1000,    0<=点赞数<=1000) 
+（0<n<=1000, 0<=点赞数<=1000) 
 ```
 
 ##### **输出描述:**
@@ -81,7 +81,7 @@ x表示总点赞数，y表示挑选的笔记总数。
 
 
 
-#### 击败魔物
+#### 3. [击败魔物](<https://www.nowcoder.com/questionTerminal/e93f31a0387b40e88a53e55b8ab703f8?answerType=1&f=discussion>)
 
 > 时间限制：C/C++ 1秒，其他语言2秒
 >
