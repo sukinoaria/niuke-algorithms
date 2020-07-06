@@ -52,7 +52,7 @@ def bfs(matrix, i, j, N):
                 if matrix[new_x][new_y] == 'E':
                     return length
                 elif matrix[new_x][new_y] != '#':
-                	#提前设定为障碍，避免重复访问
+                    #提前设定为障碍，避免重复访问
                     matrix[new_x][new_y] = '#'
                     que.append((new_x, new_y))
     return -1
