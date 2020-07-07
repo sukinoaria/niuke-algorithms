@@ -17,3 +17,31 @@ xabcabcx
 6
 ```
 
+- 分析：使用不同长度去原句中遍历是否可行，对长度的搜索使用二分查找。AC80，之后有空再看看。
+
+```python
+def check_valid(s,length):
+     
+    for i in range(len(s)):
+        if i+length < len(s) and s[i] == s[i+length]:
+            if i + length * 2 <= len(s):
+                if s[i:i+length] == s[i+length:i+2*length]:
+                    return True
+    return False
+         
+def main():
+    s = input()
+    left,right = 0,len(s)//2+1
+    max_length = 0
+    while left <= right:
+        mid = (left+right)//2
+        if check_valid(s, mid): 
+            max_length = max(max_length,mid)
+            left = mid  + 1
+        else:
+            right = mid - 1
+    
+    return max_length*2 if 0 < max_length < len(s) else 0
+print(main())
+```
+

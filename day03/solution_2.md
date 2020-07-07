@@ -1,26 +1,57 @@
-### [百分号解码](https://www.nowcoder.com/questionTerminal/79c892f6001b49d5a0680716e6f4f14d?answerType=1&f=discussion)
+###  [矿泉水问题](<https://www.nowcoder.com/questionTerminal/7a1ae529644f4d94819a2a137d59d5c6?answerType=1&f=discussion>)
+
 来源：[深信服校园招聘算法练习卷](<https://www.nowcoder.com/test/23358504/summary>)
 
-在URL字符串中，如果百分号%后面跟了两个十六进制数字，那么它表示相应ASCII值所对应的字符，如%2F表示'/'，%32表示'2'。%编码还可以进行嵌套，如%%32F可以解码成%2F，再进一步解码成/。如果没有任何百分号后面跟的是两个十六进制数字则无法再进行解码。
+小明横穿沙漠，需要携带至少x毫升的水。
 
-现在有一系列的URL，小强希望你帮忙进行百分号解码，直到无法再解码为止。
+有两种规格的矿泉水可供选购：小瓶矿泉水每瓶500ml，价格a元。大瓶矿泉水每瓶1500ml，价格b元。
+
+小明打算买一些矿泉水用于横穿沙漠，为了保证至少买到x毫升的水，小明至少需要花费多少钱？
 
 ```
 输入描述:
-第一行一个正整数T（T<=10），表示T个测试样例；
-对于每个测试样例，
-输入字符串s，字符串不包含空白符且长度小于100,000。
+第一行一个正整数t(t<=1000)，表示有t组测试数据;
 
-有部分测试样例的字符串长度<=1,000。
+接下来t行，每行3个正整数：x，a，b。其中x<=1,000,000,000，表示小明至少需要x毫升水；a<=100，b<=100，分别表示小瓶和大瓶矿泉水的价格，单位：元。
 
 输出描述:
-输出T行，每行一个字符串，表示解码后的结果。
+每组测试数据输出一行，表示小明最少需要花费的钱，单位：元。
 示例1
 输入
-1
-%%32F
+3
+5000 5 10
+4999 5 10
+5000 5 100
 输出
-/
+35
+35
+50
 ```
 
-#### 
+- 贪心算法，根据价格的比较选择合适的容量，如果`3a<b`的话就直接所有全部买小瓶，否则需要考虑在小于1500ml时的选择。
+
+```python
+from math import ceil
+def calc_min(x,a,b):
+    money = 0
+    if 3*a < b:
+        buy_cnt = ceil(x / 500)
+        money += buy_cnt * a
+        
+    else:
+        buy_cnt = x // 1500
+        x -= buy_cnt * 1500
+        money += buy_cnt * b
+        val1 = ceil(x/500)*a
+        money += val1 if val1 < b else b
+    return money
+
+def main():
+    N = int(input())
+    for i in range(N):
+        x,a,b = list(map(int,input().split()))
+        print(calc_min(x,a,b))
+        
+main()
+```
+
