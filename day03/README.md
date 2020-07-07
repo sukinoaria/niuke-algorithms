@@ -1,6 +1,6 @@
 ## day 03 
 
-### 1. [重复串查找](<https://www.nowcoder.com/questionTerminal/33d378140e084df9adbbb88eacf34e50?answerType=1&f=discussion>)
+### 1. [重复串查找](<https://www.nowcoder.com/questionTerminal/33d378140e084df9adbbb88eacf34e50>)
 来源：[深信服校园招聘算法练习卷](<https://www.nowcoder.com/test/23358504/summary>)
 
 一个重复字符串是由两个相同的字符串首尾拼接而成，例如abcabc便是长度为6的一个重复字符串，而abcba则不存在重复字符串。
@@ -21,7 +21,7 @@ xabcabcx
 
 #### [题解链接](./solution_1.md)
 
-### 2. [百分号解码](https://www.nowcoder.com/questionTerminal/79c892f6001b49d5a0680716e6f4f14d?answerType=1&f=discussion)
+### 2. [百分号解码](https://www.nowcoder.com/questionTerminal/79c892f6001b49d5a0680716e6f4f14d)
 来源：[深信服校园招聘算法练习卷](<https://www.nowcoder.com/test/23358504/summary>)
 
 在URL字符串中，如果百分号%后面跟了两个十六进制数字，那么它表示相应ASCII值所对应的字符，如%2F表示'/'，%32表示'2'。%编码还可以进行嵌套，如%%32F可以解码成%2F，再进一步解码成/。如果没有任何百分号后面跟的是两个十六进制数字则无法再进行解码。
@@ -48,7 +48,7 @@ xabcabcx
 
 #### [题解链接](./solution_2.md)
 
-### 3. [矿泉水问题](<https://www.nowcoder.com/questionTerminal/7a1ae529644f4d94819a2a137d59d5c6?answerType=1&f=discussion>)
+### 3. [矿泉水问题](<https://www.nowcoder.com/questionTerminal/7a1ae529644f4d94819a2a137d59d5c6>)
 
 来源：[深信服校园招聘算法练习卷](<https://www.nowcoder.com/test/23358504/summary>)
 
