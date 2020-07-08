@@ -23,4 +23,33 @@
 /
 ```
 
-#### 
+####  分析
+
+- 思路：倒着对字符串进行遍历，并使用栈来存储遍历的字符，当遇到`%`时弹出两个值来组合成新的字符，如果组合成的新字符是`%`的话重复进行解码，否则送入栈中，继续遍历。
+
+```python
+
+def decode(stack):
+    val1 = stack.pop()
+    val2 = stack.pop()
+    ch = chr(int(val1+val2,16))
+    if ch == '%':
+        stack = decode(stack)
+    else:
+        stack.append(ch)
+    return stack
+    
+def main():
+    N = int(input())
+    for i in range(N):
+        s = str(input())
+        stack = []
+        for c in s[::-1]:
+            if c != '%':
+                stack.append(c)
+            else:
+                stack = decode(stack)
+        print("".join(stack[::-1]))
+main()
+```
+
