@@ -45,3 +45,42 @@ k = 9, v = 1
 1 <= n, m <= 1000
 ```
 
+#### 分析
+
+- 思路：直接检索复杂度过高，之前考虑过按对角线来排查的，但是在对角线上的元素不满足大小依次增长的条件，无法用类似BFS层级遍历的方法
+
+- 二分搜索，该值的范围为`[1,N*M]`，使用中值`mid`搜索区间，并判断满足小于`mid`的值的个数`cnt`(依据每个元素的值为`x*y`确定该行有多少个值小于`mid`)
+- 二分查找的判断条件：
+  - `left < right`
+  - `cnt<=N*M-K`：`mid`的值还较小，使`left = mid+1`
+  - `else:right = mid` . 
+
+- 循环跳出条件为`left == right`，区间左闭右开搜索。
+
+```python
+N,M,K = list(map(int,input().split()))
+K = N*M - K
+
+left,right = 1,N*M
+while left < right:
+    mid = (left+right)//2
+    
+    #小于mid的计数
+    cnt = 0
+    
+    #直接通过M的值排除掉较小的一些行,这些行中最大元素都是乘M
+    cnt += mid//M*M
+    
+    #遍历之后的行，通过行号计算该行中有多少值小于mid
+    for row in range(mid//M+1,N+1):
+        cnt += mid//row
+    
+    #通过cnt计数判断第k个的范围，这里的k已经是第k小
+    if cnt <= K:
+        left = mid + 1
+    else:
+        right = mid
+
+print(left)
+```
+
