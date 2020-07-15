@@ -11,16 +11,45 @@
 一个正整数m，表示妞妞一次最少取的贝壳数量。
 示例1
 输入
-复制
 10
 输出
-复制
 1
 示例2
 输入
-复制
 70
 输出
-复制
 3
 ```
+
+#### 分析
+
+通过一个函数来计算妞妞分到的个数，并用二分查找。
+
+```python
+from math import ceil
+
+def check_num(N,m):
+    x1,x2 = 0,0
+    while N > 0:
+        #lady first
+        t2 = m if m <= N else N
+        N -= t2
+        x2 += t2
+        
+        t1 = N // 10
+        N -= t1
+        x1 += t1
+    return x2
+
+N = int(input())
+left,right = 1,N
+while left <= right :
+    mid = (left+right)//2
+    x2 = check_num(N, mid)
+    if x2 > ceil(N/2):
+        right = mid -1
+    else:
+        left = mid + 1
+print(left)
+```
+
