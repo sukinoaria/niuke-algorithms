@@ -31,5 +31,53 @@
 6
 ```
 
-#### 
+#### 分析
+
+AC 60.暴力法，从所需糖数`x in [ceil(N/2),1]`开始遍历，每次计算时，大于`x-1`的部分都需要收买，之后如果不到`x`票，则排序选择最低的部分。
+
+```python
+from math import ceil
+
+def calc_candies(need_ticket,price_dict):
+    need_candies = 0
+    cur_ticket = 0
+    for supporter_prices in price_dict.values():
+        if len(supporter_prices) >= need_ticket:
+            supporter_prices.sort(key=lambda x:-x)
+            while len(supporter_prices) >= need_ticket:
+                need_candies += supporter_prices.pop()
+                cur_ticket += 1
+    if cur_ticket >= need_ticket:
+        return need_candies
+    rest_prices = []
+    for supporter_prices in price_dict.values():
+        rest_prices += supporter_prices
+    if (need_ticket-cur_ticket) > len(rest_prices):
+        return 1e9
+    rest_prices.sort()
+    for i in range(need_ticket-cur_ticket):
+        need_candies += rest_prices[i]
+    return need_candies
+    
+N,M = list(map(int,input().split()))
+price_dict = {}
+cur_ticket = 0
+for _ in range(N):
+    x,y = list(map(int,input().split()))
+    if x == 1:
+        cur_ticket += 1
+        continue
+    if x not in price_dict.keys():
+        price_dict[x] = [y]
+    else:
+        price_dict[x].append(y)
+
+min_candies = 1e9
+for need_ticket in range(ceil(N/2),cur_ticket,-1):
+    need_candies = calc_candies(need_ticket-cur_ticket,price_dict)
+    min_candies = min(min_candies,need_candies)
+
+print(min_candies) if min_candies!=1e9 else print(0)
+
+```
 

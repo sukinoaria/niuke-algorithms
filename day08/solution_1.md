@@ -24,3 +24,23 @@
 6
 ```
 
+- 暴力法，挨个找相同的值，之后模拟交换过程把这两个值弹出，重复计算剩下的情侣们。
+
+```python
+N = int(input())
+nums = list(map(int,input().split()))
+
+times = 0
+while len(nums) > 1:
+    temp = nums.pop()
+    if temp == nums[-1]:
+        nums.pop()
+        continue
+    for i in range(len(nums)-1,-1,-1):
+        if temp == nums[i]:
+            times += (len(nums)-i-1)
+            nums.pop(i)
+            break
+print(times)
+```
+

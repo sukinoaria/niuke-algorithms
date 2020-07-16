@@ -19,3 +19,30 @@
 YES
 ```
 
+#### 分析
+
+根据题目的要求，对每个值只能进行**一次**加、减或不更改的操作，所以如果数组中`unique`的值大于等于4时一定不满足条件，小于等于2时一定满足条件，等于三时再比较三个书中是否存在一个数，使得另外两个数减去它的绝对值相等。
+
+```python
+
+def check_valid(N,nums):
+    unique_values = set(nums)
+    if len(unique_values) < 3:return "YES"
+    elif len(unique_values) >= 4:return "NO"
+    for val1 in unique_values:
+        abs_minus_vals = set()
+        for val2 in unique_values - set([val1]):
+            abs_minus_vals.add(abs(val1-val2))
+            if len(abs_minus_vals) > 1:
+                break
+        if len(abs_minus_vals) == 1:
+            return "YES"
+    return "NO"
+
+T = int(input())
+for t in range(T):
+    N = int(input())
+    nums = list(map(int,input().split()))
+    print(check_valid(N,nums))
+```
+
