@@ -13,13 +13,27 @@
 示例1
 输入
 3
-8 6 9
+8
+6
+9
 输出
 21
 示例2
 输入
 2
-3 5
+3
+5
 输出
 7
 ```
+
+#### 简单题
+
+```python
+N = int(input())
+nums = []
+for _ in range(N):
+    nums.append(int(input()))
+print(sum(nums)-N+1)
+```
+

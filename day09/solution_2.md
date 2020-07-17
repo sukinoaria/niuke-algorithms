@@ -17,3 +17,35 @@
 14
 ```
 
+#### 思路
+
+- 贪心：相邻花圃需要的花朵数的差值是一定需要种植的，最后在额外加上循环中未计算的最后一个花圃的个数。
+
+```python
+n = int(input())
+l = list(map(int, input().split()))
+res = 0
+for i in range(n-1):
+    res += max(0, l[i] - l[i+1])
+print(res + l[-1])
+```
+
+- 动态规划：`dp[i]`前i个编号的花圃满足条件所需要的天数，因此，只需要考虑`A[i]`和`A[i-1]`的大小，如果`A[i]<A[i-1]`，则不需要花费额外天数，否则需要额外花费其差的天数`abs(A[i]-a[i-1])`。
+- `dp[0]=A[0]`
+
+```python
+
+N = int(input())
+nums = list(map(int, input().split()))
+
+dp = [0 for _ in range(N)]
+dp[0] = nums[0]
+
+for i in range(1,N):
+    if nums[i] <= nums[i-1]:
+        dp[i] = dp[i-1]
+    else:
+        dp[i] = dp[i-1] + nums[i]-nums[i-1]
+print(dp[-1])
+```
+
