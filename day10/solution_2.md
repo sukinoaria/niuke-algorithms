@@ -18,3 +18,21 @@ N和cost[i]皆为整数，且N∈[2,1000]，cost[i]∈ [0, 999]。
 6
 ```
 
+#### 分析
+
+动态规划，从第0个位置和第1个位置出发都是0，之后转移方程：
+
+`f(i) = min(f(i-1)+nums[i-1],f(i-2)+nums[i-2])`
+
+```python
+nums = list(map(int,input().split(',')))
+
+dp = [0] * (len(nums)+1)
+#dp[0] = nums[0]
+#dp[1] = min(nums[0],nums[1])
+
+for i in range(2,len(nums)+1):
+    dp[i] = min(dp[i-1]+nums[i-1],dp[i-2]+nums[i-2])
+print(dp[-1])
+```
+

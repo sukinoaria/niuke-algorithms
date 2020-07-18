@@ -20,5 +20,46 @@ c. 树内节点数不超过 10000，非空节点值为大于0小于65536的整�
 True
 ```
 
+### 分析
 
+先根据数组构建树，之后再中序遍历，判断是不是递增序列。
+
+```python
+
+class treeNode:
+    def __init__(self,val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+def build_tree(nums,index):
+    if index >= len(nums) or nums[index] =="None":
+        return None
+    node = treeNode(int(nums[index]))
+    node.left = build_tree(nums, index*2+1)
+    node.right = build_tree(nums, index*2+2)
+    return node
+
+inorder_nums = []
+def inorder(root):
+    if not root:return
+    inorder(root.left)
+    inorder_nums.append(root.val)
+    inorder(root.right)
+
+nums = list(input().split(','))
+
+if len(nums) <= 1:
+    print("True")
+    exit()
+
+tree = build_tree(nums,0)
+inorder(tree)
+
+for i in range(len(inorder_nums)-1):
+    if inorder_nums[i]>inorder_nums[i+1]:
+        print("False")
+        exit()
+print("True")
+```
 
