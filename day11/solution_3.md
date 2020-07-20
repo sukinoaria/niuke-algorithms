@@ -16,3 +16,23 @@
 45
 ```
 
+#### 分析
+
+大根堆存储，之后取出K个数。
+
+`heapq`为小根堆，加负号处理。
+
+```python
+from heapq import heapify,heappush,heappop
+
+nums = list(map(lambda x :-int(x),input().split()))
+K = int(input())
+
+heapify(nums)
+
+while K > 1:
+    heappop(nums)
+    K -= 1
+print(-heappop(nums))
+```
+
