@@ -14,4 +14,41 @@ frankfurt
 4
 ```
 
-#### 
+#### 分析
+
+先从[1,N-2]切分原字符串为两个字符串`s`和`t`，再求他们的最长公共子序列。
+
+- 状态转移：
+
+```python
+dp[i][j]  #i为字符串s的遍历索引，j为t的索引
+
+#当 s[i-1] == t[j-1]时，dp[i][j] = [i-1][j-1]+1
+
+#不相等时，转移的路径分别有三个：
+dp[i-1][j-1] :  #即i与j进行对齐
+dp[i-1][j]   :  #即i-1与j进行对齐
+dp[i][j-1]   :  #即i与j-1进行对齐
+```
+
+- 注意索引开始遍历的值以及比较的位置。
+
+```python
+def calc_LCS(s,t):
+    dp = [[0] * (len(t)+1) for _ in range(len(s)+1)]
+    for i in range(1,len(s)+1):
+        for j in range(1,len(t)+1):
+            if s[i-1] == t[j-1]:
+                dp[i][j] = dp[i-1][j-1]+1
+            else:
+                dp[i][j] = max(dp[i-1][j-1],dp[i-1][j],dp[i][j-1])
+    return dp[-1][-1]
+
+s = input()
+
+max_length = 0
+for i in range(1,len(s)-1):
+    max_length = max(max_length,calc_LCS(s[:i],s[i:]))
+print(max_length*2)
+```
+

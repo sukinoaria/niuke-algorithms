@@ -14,4 +14,28 @@
 5
 ```
 
-#### 
+#### 分析
+
+**把任一一根木棍长度削短**，穷举，计算出所有的可能性选最大的。
+
+如果可以随意削短多根的话，可以使用BFS。
+
+```python
+from collections import deque
+
+def is_triangle(a,b,c):
+    if a+b>c and a+c>b and b+c>a:
+        return True
+    return False
+
+def calc_max_length(a,b,c):
+    for i in range(a):
+        if is_triangle(a-i, b, c):
+            return a+b+c-i
+    return 0
+
+a,b,c = list(map(int,input().split()))
+max_length = max(calc_max_length(a, b, c),calc_max_length(b, a, c),calc_max_length(c,a, b))
+print(max_length)
+```
+
