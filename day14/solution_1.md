@@ -17,4 +17,31 @@
 距离目的地2， 需要3步：朝向走1，背向走2，朝向走3且牛牛还希望这个三角形的周长越大越好。
 ```
 
-#### 
+#### 分析
+
+- 层次遍历，每次有加和减`i`两个选项，将其结果送到队列中。
+
+- 使用层次遍历的原因：方便设定终止条件，如果当前层所有的位置和下一步的步数和都大于`N`的话，就再也不会走到指定的位置了。
+
+```python
+from collections import deque
+N = int(input())
+
+que = deque([(0,1)])
+while que:
+	# 标记当前层是不是还有小于N的值
+    SMALLER = False
+    for _ in range(len(que)):
+        cur_pos,step = que.popleft()
+        if cur_pos == N:
+            print(step-1)
+            exit()
+        if cur_pos+ step <= N:
+            SMALLER = True
+        que.append([cur_pos+step,step+1])
+        que.append([cur_pos-step,step+1])
+    if not SMALLER:
+        print(-1)
+        break
+```
+
