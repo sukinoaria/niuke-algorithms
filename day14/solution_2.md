@@ -20,3 +20,30 @@
 1
 ```
 
+#### 分析
+
+- 简单题，贪心：先排序然后使用`left`和`right`指针向中间搜索
+  - 如果`left==right`,只剩下一个人，`count+1`
+  - 如果和小于等于`limit`，两个指针向中间移动，`count+1`
+  - 否则，right位置的人超重了，单人一个船，`count+1`
+
+```python
+nums = list(map(int,input().split()))
+limit = int(input())
+
+count = 0
+nums = sorted(nums)
+left,right = 0,len(nums)-1
+while left <= right:
+    if left == right :
+        count += 1
+        break
+    elif nums[left]+nums[right]<=limit:
+        left += 1
+        right -= 1
+    else:
+        right -= 1
+    count += 1
+print(count)
+```
+
