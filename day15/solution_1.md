@@ -18,4 +18,29 @@
 19
 ```
 
-#### 
+#### 分析
+
+即求到达`[N-1,N-1]`位置的最小和，动态规划(尝试了带memo的递归并不能AC)
+
+- 初始条件：`dp[0,0]`位置的值即为`matrix[0][0]`，接下来先对第一行和第一列的结果进行计算(转移方式固定)
+- 之后`dp[i][j] = min(dp[i-1][j],dp[i][j-1])+matrix[i][j]`
+
+```python
+
+N = int(input())
+matrix = [[0]*N for _ in range(N)]
+for i in range(N):
+    matrix[i] = list(map(int,input().split(',')))
+
+# 行和列值初始化
+for i in range(1,N):
+    matrix[0][i] += matrix[0][i-1]
+    matrix[i][0] += matrix[i-1][0]
+
+for i in range(1,N):
+    for j in range(1,N):
+        matrix[i][j] = min(matrix[i-1][j],matrix[i][j-1])+matrix[i][j]
+
+print(matrix[-1][-1])
+```
+
