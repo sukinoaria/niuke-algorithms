@@ -20,3 +20,25 @@
 7
 ```
 
+#### 分析
+
+- 分两次遍历：从左到右以及从右到左
+
+- 从左到右：初始情况下每个位置糖果为1，如果满足升序条件，其糖果数为上一个的糖果数加一
+- 从右到左：找分数高但糖果数比右侧低的，将其值改为`max(candies[i],candies[i+1]+1)`。
+
+```python
+scores = list(map(int,input().split(',')))
+candies = [1 for _ in range(len(scores))]
+
+for i in range(1,len(scores)):
+    if scores[i] > scores[i-1]:
+        candies[i] = candies[i-1]+1
+
+for i in range(len(scores)-2,-1,-1):
+    if scores[i] > scores[i+1]:
+        candies[i] = max(candies[i],candies[i+1]+1)
+    
+print(sum(candies))
+```
+
