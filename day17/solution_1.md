@@ -21,4 +21,26 @@
 -1
 ```
 
-#### [题解链接](./solution_1.md)
+#### 分析
+
+计算出均值，然后对每一个小于均值的计算需要的次数，如果不能整除2的话说明不存在方案。
+
+```python
+N = int(input())
+nums = list(map(int,input().split()))
+
+if sum(nums)%N !=0:
+    print(-1)
+else:
+    mean_val = sum(nums)/N
+    cnt = 0
+    for val in nums:
+        if val < mean_val:
+            if (mean_val-val)%2==0:
+                cnt += (mean_val-val)/2
+            else:
+                print(-1)
+                break
+    print(int(cnt))
+```
+

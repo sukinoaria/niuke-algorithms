@@ -21,3 +21,30 @@
 4
 ```
 
+#### 分析
+
+- 动态规划，求排好序的最长上升子序列
+
+```python
+while True:
+    try:
+        N = int(input())
+        nums = []
+        for _ in range(N):
+            _,weight,height = list(map(int,input().split()))
+            nums.append([weight,height])
+        nums.sort(key = lambda x:x[1])
+        nums.sort(key = lambda x:-x[0])
+        max_num = 0
+        dp = [1]*N
+        for i in range(1,N):
+            for j in range(i):
+                if nums[i][1] <= nums[j][1]:
+                    dp[i] = max(dp[i],dp[j]+1)
+
+            max_num = max(max_num,dp[i])
+        print(max_num)
+    except:
+        break
+```
+
