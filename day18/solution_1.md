@@ -15,3 +15,37 @@
 11
 ```
 
+#### 分析
+
+- 思路是把所有的音符划分成`m`份，然后保证这`m`份中的和的最小值越小越好
+- 二分法，遍历不同的步长step
+
+```python
+def calc_valid(nums,max_minute,cur_step):
+    need_minute = 0
+    cur_length = 0
+    for val in nums:
+        if cur_length + val > cur_step:
+            need_minute += 1
+            cur_length = val
+        else:
+            cur_length += val
+    if cur_length != 0:need_minute +=1
+    if need_minute <= max_minute:
+        return True
+    return False
+
+N, M = list(map(int,input().split()))
+vals = list(map(int,input().split()))
+
+mid = 0
+left,right =7,sum(vals)
+while left <= right:
+    mid = (left+right)//2
+    if calc_valid(vals.copy(), M, mid):
+        right = mid - 1
+    else:
+        left = mid + 1
+print(mid)
+```
+

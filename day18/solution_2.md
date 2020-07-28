@@ -21,3 +21,25 @@ xn, yn
 4
 ```
 
+#### 分析
+
+- 问题中的位置和方向描述的很迷惑
+- 构造`x*y`的dp数组，`(0,0)`为起始位置，到`(x,y)`的路径数
+- 转移方程：`dp[i][j] = dp[i-1][j]+dp[i][j-1]`
+- `basecase`:对每一个非boss的点其路径均为1，boss处为0，dp计算中遇到boss点跳过。
+
+```python
+x,y,n = list(map(int,input().split()))
+dp = [[1]*(y+1) for _ in range(x+1)]
+
+for _ in range(n):
+    boss_x,boss_y = list(map(int,input().split()))
+    dp[boss_x][boss_y] = 0
+for i in range(1,x+1):
+    for j in range(1,y+1):
+        if dp[i][j] != 0:
+            dp[i][j] = dp[i-1][j]+dp[i][j-1]
+            
+print(dp[-1][-1])
+```
+
