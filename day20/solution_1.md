@@ -9,3 +9,39 @@
 返回：6
 ```
 
+#### 分析
+
+使用桶来计数每个值是不是存在，然后再遍历一次这个桶，中途记录下离得最远的桶的距离，这个距离加1就是最大的元素差。
+
+```c++
+#include<bits/stdc++.h>
+using namespace std;
+
+class MaxDivision {
+public:
+    int findMaxDivision(vector<int> A, int n) {
+        int max = *max_element(A.begin(),A.end());
+        vector<int> buckets(max+1,0);
+        for(auto i = A.begin();i!=A.end();i++)
+            buckets[*i] = 1;
+        auto j = buckets.begin();
+        while(*j == 0) j++;
+        int cnt = 0;
+        int max_cnt = 0;
+        for(;j!=buckets.end();j++)
+        {
+            if(*j != 0)
+            {
+                cnt = 0;
+                continue;
+            }
+            else {
+                cnt += 1;
+                max_cnt = cnt > max_cnt ? cnt : max_cnt;
+            }
+        }
+        return max_cnt+1;
+    }
+};
+```
+
