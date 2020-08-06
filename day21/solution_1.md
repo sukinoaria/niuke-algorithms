@@ -17,3 +17,31 @@ ABAB
 2
 ```
 
+##### 分析
+
+还以为自己没理解他的意思：只要任意两种字符之间满足其相邻的个数小于等于1即可，是我想的太多
+
+```python
+char_set = set(list(input()))
+print(0) if len(char_set) > 2 else print(len(char_set))
+```
+
+```c++
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    string s;
+    cin >> s;
+    set<char> char_set;
+    for(auto c:s)
+        char_set.insert(c);
+    if (char_set.size() > 2)
+        cout << 0 << endl;
+    else
+        cout << char_set.size() << endl;
+    return 0;
+}
+```
+
