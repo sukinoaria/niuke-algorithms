@@ -18,3 +18,132 @@
 2
 ```
 
+#### 分析
+
+- 使用二分查找来搜索能满足条件的最大值。
+- 对每一个值k，判断其是否存在一种划分，能让他是最小的那一块。
+  - 对于列的划分，使用三个变量进行循环
+  - 对于行，则是在列的基础上计算出能满足和大于k的最小的划分，如果能划分出四行及以上，则证明这个k是可以得到的，接下来调整二分查找范围`left=mid+1`，否则`right=mid-1`
+
+- 和的计算：可以计算从`[0,0]`到对应位置的范围和，然后有：`f(x1,y1,x2,y2) =f(x2,y2)-f(x1-1,y2)-f(x2,y1-1)+f(x1-1,y1-1) `
+- 在循环体中需要尽可能地进行和的值的判断来剪枝，不然会超出时间要求
+
+```python
+
+def calc_sum(x1,y1,x2,y2,val_sum):
+    return val_sum[x2][y2] - val_sum[x1-1][y2] - val_sum[x2][y1-1] + val_sum[x1-1][y1-1]
+
+def check_valid(val_sum,k,M,N):
+    for y1 in range(1,N-2):
+        if calc_sum(1, 1, M, y1, val_sum) < k*4:continue
+        for y2 in range(y1+1,N-1):
+            if calc_sum(1, y1+1, M, y2, val_sum) < k*4:continue
+            for y3 in range(y2+1,N):
+                if calc_sum(1, y2+1, M, y3, val_sum) < k*4:continue
+                if calc_sum(1, y3+1, M, N, val_sum) < k*4:continue
+                split_part = 0
+                last_part = 1
+                for x in range(1,M+1):
+                    # 选用x轴后，这四块都满足和大于k
+                    if calc_sum(last_part,1,x,y1, val_sum) >= k and calc_sum(last_part,y1+1,x,y2, val_sum) >= k and calc_sum(last_part,y2+1,x,y3, val_sum) >= k and calc_sum(last_part,y3+1,x,N, val_sum) >= k:
+                        split_part += 1
+                        #设定该x轴，然后继续向右遍历，看还有几个x轴的划分能满足条件
+                        last_part = x+1
+                    #能划分出4列满足条件的，则返回true
+                    if split_part >= 4:
+                        return True
+    return False
+
+[M,N] = map(int,input().split())
+nums=[list(map(int,list(input().strip()))) for _ in range(M)]
+
+val_sum = [[0] * (N+1) for _ in range(M+1)]
+for i in range(1,M+1):
+    for j in range(1,N+1):
+        val_sum[i][j] = val_sum[i][j-1] + val_sum[i-1][j] - val_sum[i-1][j-1] + nums[i-1][j-1]
+
+res = 0
+left,right = 0,val_sum[-1][-1]
+while left <= right:
+    mid = (left + right )//2
+    if(check_valid(val_sum,mid,M,N)):
+        left = mid + 1
+        res = max(res,mid)
+    else:
+        right = mid - 1
+        
+print(res)
+```
+
+```c++
+#include<bits/stdc++.h>
+using namespace std;
+
+int nums[100][100],sums[100][100];
+
+
+int calc_sum(int x1,int y1,int x2,int y2)
+{
+    return sums[x2][y2]-sums[x1-1][y2]-sums[x2][y1-1]+sums[x1-1][y1-1];
+}
+
+
+bool check_valid(int k,int M,int N)
+{
+    for(int y1 = 1;y1<=N-3;y1++)
+    {
+        for(int y2 = y1+1;y2<=N-2;y2++)
+        {
+            for(int y3=y2+1;y3<=N-1;y3++)
+            {
+                int split_part=0,last_part=1;
+                for(int x=1;x<=M;x++)
+                {
+                    if(calc_sum(last_part, 1,x,y1)>=k && calc_sum(last_part,y1+1,x,y2)>=k && calc_sum(last_part, y2+1,x,y3)>=k && calc_sum(last_part, y3+1,x,N)>=k)
+                    {
+                        last_part = x+1;
+                        split_part += 1;
+                    }
+                    if(split_part>=4)
+                        return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+
+int main()
+{
+    int N,M,res=0;
+    cin >> M >> N;
+    memset(sums,0,sizeof(sums));
+    string s;
+    for (int i = 0;i< M;i++)
+    {
+        cin >> s;
+        for (int j = 0; j<s.length();j++)
+            nums[i][j] = s[j]-'0';
+    }
+
+    for(int i=1;i<=M;i++)
+        for (int j=1;j<=N;j++)
+            sums[i][j] = sums[i-1][j] + sums[i][j-1]-sums[i-1][j-1]+nums[i-1][j-1];
+
+    int left=0,right=sums[M][N];
+    while(left <= right)
+    {
+        int mid = (left+right)/2;
+        if(check_valid(mid,M,N))
+        {
+            left = mid + 1;
+            res = max(res,mid);
+        }
+        else
+            right = mid - 1;
+    }
+    cout << res<<endl;
+}
+```
+
